@@ -1,0 +1,1622 @@
+{
+  "meta": {
+    "fileKey": "2uqWKJjv2XY5Z5brHiiXVc",
+    "fileName": "Checkpoint, maquettes du PFE",
+    "extractedAt": "2026-10-30"
+  },
+  "totals": {
+    "pages": 6,
+    "screens": 35,
+    "conformes": 24,
+    "aRelire": 8,
+    "aCorriger": 3,
+    "errors": 11,
+    "warnings": 40,
+    "infos": 2,
+    "nodes": 3655,
+    "textPairs": 1075
+  },
+  "perRule": {
+    "espacement": {
+      "count": 4,
+      "screens": 2
+    },
+    "rayonLibre": {
+      "count": 40,
+      "screens": 8
+    },
+    "rayon": {
+      "count": 7,
+      "screens": 1
+    },
+    "chevauchement": {
+      "count": 2,
+      "screens": 2
+    }
+  },
+  "pages": [
+    {
+      "id": "7:437",
+      "name": "01 Vérifier un jeu",
+      "screens": [
+        {
+          "id": "8:28",
+          "name": "1.1 Accueil / Ordinateur",
+          "width": 1440,
+          "height": 3081,
+          "mode": "Ordinateur",
+          "nodes": 78,
+          "instances": 13,
+          "textPairs": 26,
+          "issues": [
+            {
+              "rule": "espacement",
+              "severity": "error",
+              "count": 2,
+              "samples": [
+                [
+                  "8:64",
+                  "Hero",
+                  "paddingLeft 240"
+                ],
+                [
+                  "8:64",
+                  "Hero",
+                  "paddingRight 240"
+                ]
+              ]
+            }
+          ],
+          "errors": 2,
+          "warnings": 0,
+          "infos": 0,
+          "status": "a corriger"
+        },
+        {
+          "id": "10:118",
+          "name": "1.3 Fiche jeu / Ordinateur",
+          "width": 1440,
+          "height": 4152,
+          "mode": "Ordinateur",
+          "nodes": 385,
+          "instances": 21,
+          "textPairs": 109,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "12:202",
+          "name": "1.2 Recherche d'un jeu / Ordinateur",
+          "width": 1440,
+          "height": 1420,
+          "mode": "Ordinateur",
+          "nodes": 60,
+          "instances": 11,
+          "textPairs": 21,
+          "issues": [
+            {
+              "rule": "espacement",
+              "severity": "error",
+              "count": 2,
+              "samples": [
+                [
+                  "12:236",
+                  "Recherche",
+                  "paddingLeft 240"
+                ],
+                [
+                  "12:236",
+                  "Recherche",
+                  "paddingRight 240"
+                ]
+              ]
+            }
+          ],
+          "errors": 2,
+          "warnings": 0,
+          "infos": 0,
+          "status": "a corriger"
+        },
+        {
+          "id": "12:389",
+          "name": "1.4 Profil, introduction / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 58,
+          "instances": 2,
+          "textPairs": 9,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "12:460",
+          "name": "1.5 Profil, étape 1 Lire et voir / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 33,
+          "instances": 9,
+          "textPairs": 5,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 7,
+              "samples": [
+                [
+                  "12:483",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "12:484",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "12:485",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 7,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "12:534",
+          "name": "1.6 Profil, étape 3 Tenir et appuyer / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 36,
+          "instances": 9,
+          "textPairs": 5,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 7,
+              "samples": [
+                [
+                  "12:557",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "12:558",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "12:559",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 7,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "13:361",
+          "name": "1.7 Profil, étape 5 Lumière et mouvement / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 31,
+          "instances": 8,
+          "textPairs": 5,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 7,
+              "samples": [
+                [
+                  "13:384",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "13:385",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "13:386",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 7,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "13:429",
+          "name": "1.8 Profil, étape 7 Ton matériel / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 38,
+          "instances": 12,
+          "textPairs": 5,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 7,
+              "samples": [
+                [
+                  "13:452",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "13:453",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "13:454",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 7,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "13:512",
+          "name": "1.9 Profil prêt / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 80,
+          "instances": 2,
+          "textPairs": 15,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "13:605",
+          "name": "1.10 Fiche jeu / Mobile",
+          "width": 390,
+          "height": 2407,
+          "mode": "Mobile",
+          "nodes": 136,
+          "instances": 13,
+          "textPairs": 35,
+          "issues": [
+            {
+              "rule": "rayon",
+              "severity": "error",
+              "count": 7,
+              "samples": [
+                [
+                  "13:659",
+                  "Rectangle",
+                  "rayon 2"
+                ],
+                [
+                  "13:660",
+                  "Rectangle",
+                  "rayon 2"
+                ],
+                [
+                  "13:661",
+                  "Rectangle",
+                  "rayon 2"
+                ]
+              ]
+            }
+          ],
+          "errors": 7,
+          "warnings": 0,
+          "infos": 0,
+          "status": "a corriger"
+        },
+        {
+          "id": "72:787",
+          "name": "1.11 Accueil / Mobile",
+          "width": 390,
+          "height": 4801,
+          "mode": "Mobile",
+          "nodes": 63,
+          "instances": 18,
+          "textPairs": 25,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "75:1002",
+          "name": "1.12 Recherche d'un jeu / Mobile",
+          "width": 390,
+          "height": 1372,
+          "mode": "Mobile",
+          "nodes": 27,
+          "instances": 10,
+          "textPairs": 8,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        }
+      ],
+      "errors": 11,
+      "warnings": 28,
+      "infos": 0
+    },
+    {
+      "id": "7:438",
+      "name": "02 Trouver un jeu",
+      "screens": [
+        {
+          "id": "14:28",
+          "name": "2.1 Fiche jeu pas jouable, jeux proches / Ordinateur",
+          "width": 1440,
+          "height": 2588,
+          "mode": "Ordinateur",
+          "nodes": 113,
+          "instances": 17,
+          "textPairs": 29,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "15:122",
+          "name": "2.2 Trouver, résultats en liste / Ordinateur",
+          "width": 1440,
+          "height": 2083,
+          "mode": "Ordinateur",
+          "nodes": 98,
+          "instances": 27,
+          "textPairs": 20,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "15:489",
+          "name": "2.3 Trouver, résultats en tableau / Ordinateur",
+          "width": 1440,
+          "height": 2083,
+          "mode": "Ordinateur",
+          "nodes": 198,
+          "instances": 27,
+          "textPairs": 62,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "76:609",
+          "name": "2.4 Fiche pas jouable / Mobile",
+          "width": 390,
+          "height": 3852,
+          "mode": "Mobile",
+          "nodes": 48,
+          "instances": 20,
+          "textPairs": 14,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "77:851",
+          "name": "2.5 Trouver, résultats / Mobile",
+          "width": 390,
+          "height": 1941,
+          "mode": "Mobile",
+          "nodes": 50,
+          "instances": 20,
+          "textPairs": 13,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "78:1030",
+          "name": "2.6 Trouver, filtres / Mobile",
+          "width": 390,
+          "height": 1389,
+          "mode": "Mobile",
+          "nodes": 33,
+          "instances": 18,
+          "textPairs": 4,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        }
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0
+    },
+    {
+      "id": "7:439",
+      "name": "03 Comparer des profils",
+      "screens": [
+        {
+          "id": "16:28",
+          "name": "3.1 Mes profils, compte structure / Ordinateur",
+          "width": 1440,
+          "height": 1655,
+          "mode": "Ordinateur",
+          "nodes": 191,
+          "instances": 4,
+          "textPairs": 48,
+          "issues": [
+            {
+              "rule": "chevauchement",
+              "severity": "info",
+              "count": 1,
+              "samples": [
+                [
+                  "16:238",
+                  "Avatars",
+                  "itemSpacing -10"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 1,
+          "status": "conforme"
+        },
+        {
+          "id": "16:289",
+          "name": "3.2 Comparaison de profils sur un jeu / Ordinateur",
+          "width": 1440,
+          "height": 2241,
+          "mode": "Ordinateur",
+          "nodes": 215,
+          "instances": 9,
+          "textPairs": 79,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "79:335",
+          "name": "3.3 Mes profils / Mobile",
+          "width": 390,
+          "height": 1544,
+          "mode": "Mobile",
+          "nodes": 96,
+          "instances": 30,
+          "textPairs": 30,
+          "issues": [
+            {
+              "rule": "chevauchement",
+              "severity": "info",
+              "count": 1,
+              "samples": [
+                [
+                  "79:501",
+                  "Avatars",
+                  "itemSpacing -8"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 1,
+          "status": "conforme"
+        },
+        {
+          "id": "80:445",
+          "name": "3.4 Comparaison de profils / Mobile",
+          "width": 390,
+          "height": 2758,
+          "mode": "Mobile",
+          "nodes": 134,
+          "instances": 33,
+          "textPairs": 43,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        }
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "infos": 2
+    },
+    {
+      "id": "7:440",
+      "name": "04 Contribuer",
+      "screens": [
+        {
+          "id": "17:28",
+          "name": "4.1 Contribuer, question 1 / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 30,
+          "instances": 9,
+          "textPairs": 7,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 3,
+              "samples": [
+                [
+                  "17:52",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:53",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:54",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 3,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "17:90",
+          "name": "4.2 Contribuer, question 2 / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 36,
+          "instances": 9,
+          "textPairs": 10,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 3,
+              "samples": [
+                [
+                  "17:114",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:115",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:116",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 3,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "17:165",
+          "name": "4.3 Contribuer, question 3 / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 33,
+          "instances": 6,
+          "textPairs": 8,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 3,
+              "samples": [
+                [
+                  "17:189",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:190",
+                  "Rectangle",
+                  "rayon 3"
+                ],
+                [
+                  "17:191",
+                  "Rectangle",
+                  "rayon 3"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 3,
+          "infos": 0,
+          "status": "a relire"
+        },
+        {
+          "id": "17:230",
+          "name": "4.4 Contribuer, merci / Mobile",
+          "width": 390,
+          "height": 844,
+          "mode": "Mobile",
+          "nodes": 33,
+          "instances": 3,
+          "textPairs": 10,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "18:112",
+          "name": "4.5 Grille de vérification complète / Tablette",
+          "width": 1194,
+          "height": 1290,
+          "mode": "Tablette",
+          "nodes": 289,
+          "instances": 2,
+          "textPairs": 83,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        }
+      ],
+      "errors": 0,
+      "warnings": 9,
+      "infos": 0
+    },
+    {
+      "id": "7:441",
+      "name": "05 Studio",
+      "screens": [
+        {
+          "id": "19:28",
+          "name": "5.1 Espace studio, déclarer les tags / Ordinateur",
+          "width": 1440,
+          "height": 2428,
+          "mode": "Ordinateur",
+          "nodes": 180,
+          "instances": 10,
+          "textPairs": 53,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "20:106",
+          "name": "5.2 Espace studio, retours et réponse publique / Ordinateur",
+          "width": 1440,
+          "height": 1890,
+          "mode": "Ordinateur",
+          "nodes": 115,
+          "instances": 10,
+          "textPairs": 36,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "84:369",
+          "name": "5.3 Déclarer les tags / Mobile",
+          "width": 390,
+          "height": 2405,
+          "mode": "Mobile",
+          "nodes": 86,
+          "instances": 26,
+          "textPairs": 27,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "86:486",
+          "name": "5.4 Retours et réponse / Mobile",
+          "width": 390,
+          "height": 1443,
+          "mode": "Mobile",
+          "nodes": 42,
+          "instances": 11,
+          "textPairs": 15,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        }
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0
+    },
+    {
+      "id": "7:442",
+      "name": "06 Pages institutionnelles",
+      "screens": [
+        {
+          "id": "21:270",
+          "name": "6.1 La méthode / Ordinateur",
+          "width": 1440,
+          "height": 3173,
+          "mode": "Ordinateur",
+          "nodes": 232,
+          "instances": 11,
+          "textPairs": 69,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "23:115",
+          "name": "6.2 L'association / Ordinateur",
+          "width": 1440,
+          "height": 2652,
+          "mode": "Ordinateur",
+          "nodes": 128,
+          "instances": 3,
+          "textPairs": 47,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "88:354",
+          "name": "6.3 La méthode / Mobile",
+          "width": 390,
+          "height": 4361,
+          "mode": "Mobile",
+          "nodes": 138,
+          "instances": 23,
+          "textPairs": 57,
+          "issues": [],
+          "errors": 0,
+          "warnings": 0,
+          "infos": 0,
+          "status": "conforme"
+        },
+        {
+          "id": "89:514",
+          "name": "6.4 L'association / Mobile",
+          "width": 390,
+          "height": 3473,
+          "mode": "Mobile",
+          "nodes": 112,
+          "instances": 13,
+          "textPairs": 43,
+          "issues": [
+            {
+              "rule": "rayonLibre",
+              "severity": "warning",
+              "count": 3,
+              "samples": [
+                [
+                  "89:602",
+                  "Valeur",
+                  "rayon 6"
+                ],
+                [
+                  "89:608",
+                  "Valeur",
+                  "rayon 6"
+                ],
+                [
+                  "89:614",
+                  "Valeur",
+                  "rayon 6"
+                ]
+              ]
+            }
+          ],
+          "errors": 0,
+          "warnings": 3,
+          "infos": 0,
+          "status": "a relire"
+        }
+      ],
+      "errors": 0,
+      "warnings": 3,
+      "infos": 0
+    }
+  ],
+  "palette": {
+    "modes": [
+      "Clair",
+      "Contraste élevé"
+    ],
+    "rows": [
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "fond",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#f7f4ee",
+        "ratio": 16.43031176257395,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "fond",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#ffffff",
+        "ratio": 21,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#ffffff",
+        "ratio": 18.036680767380904,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#ffffff",
+        "ratio": 21,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "champ",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#f2eee6",
+        "ratio": 15.587039782106773,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "champ",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#ffffff",
+        "ratio": 21,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "survol",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#efe9de",
+        "ratio": 14.927925837452912,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "survol",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#ece6da",
+        "ratio": 16.897690268390782,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "primaire-doux",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#e7e5fb",
+        "ratio": 14.599848237903663,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "primaire-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#e7e5fb",
+        "ratio": 16.998516353987547,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "jouable-doux",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#dcefe3",
+        "ratio": 15.029656713179353,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "jouable-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#dcefe3",
+        "ratio": 17.498939802026435,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "adaptations-doux",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#fbe9d2",
+        "ratio": 15.192072861109365,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "adaptations-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#fbe9d2",
+        "ratio": 17.688039955791897,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "bloquant-doux",
+        "mode": "Clair",
+        "fgHex": "#14161f",
+        "bgHex": "#f8dedb",
+        "ratio": 14.139638390829392,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre",
+        "bg": "bloquant-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#000000",
+        "bgHex": "#f8dedb",
+        "ratio": 16.462696769818955,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "fond",
+        "mode": "Clair",
+        "fgHex": "#4a4f5e",
+        "bgHex": "#f7f4ee",
+        "ratio": 7.440016351358957,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "fond",
+        "mode": "Contraste élevé",
+        "fgHex": "#262935",
+        "bgHex": "#ffffff",
+        "ratio": 14.472803871323459,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#4a4f5e",
+        "bgHex": "#ffffff",
+        "ratio": 8.167416527008921,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#262935",
+        "bgHex": "#ffffff",
+        "ratio": 14.472803871323459,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "champ",
+        "mode": "Clair",
+        "fgHex": "#4a4f5e",
+        "bgHex": "#f2eee6",
+        "ratio": 7.058163747830771,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "champ",
+        "mode": "Contraste élevé",
+        "fgHex": "#262935",
+        "bgHex": "#ffffff",
+        "ratio": 14.472803871323459,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "primaire-doux",
+        "mode": "Clair",
+        "fgHex": "#4a4f5e",
+        "bgHex": "#e7e5fb",
+        "ratio": 6.611141114485205,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "encre-douce",
+        "bg": "primaire-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#262935",
+        "bgHex": "#e7e5fb",
+        "ratio": 11.715056823559339,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "fond",
+        "mode": "Clair",
+        "fgHex": "#3b33cc",
+        "bgHex": "#f7f4ee",
+        "ratio": 7.55691457499212,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "fond",
+        "mode": "Contraste élevé",
+        "fgHex": "#2a22a8",
+        "bgHex": "#ffffff",
+        "ratio": 11.09532081902355,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#3b33cc",
+        "bgHex": "#ffffff",
+        "ratio": 8.295743729341625,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#2a22a8",
+        "bgHex": "#ffffff",
+        "ratio": 11.09532081902355,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "primaire-doux",
+        "mode": "Clair",
+        "fgHex": "#3b33cc",
+        "bgHex": "#e7e5fb",
+        "ratio": 6.715015973890631,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "primaire",
+        "bg": "primaire-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#2a22a8",
+        "bgHex": "#e7e5fb",
+        "ratio": 8.98114249499573,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "jouable",
+        "bg": "jouable-doux",
+        "mode": "Clair",
+        "fgHex": "#1d6b45",
+        "bgHex": "#dcefe3",
+        "ratio": 5.398817143620811,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "jouable",
+        "bg": "jouable-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#0b4f30",
+        "bgHex": "#dcefe3",
+        "ratio": 8.044371043371024,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "jouable",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#1d6b45",
+        "bgHex": "#ffffff",
+        "ratio": 6.478973086295651,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "jouable",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#0b4f30",
+        "bgHex": "#ffffff",
+        "ratio": 9.653830107537637,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "adaptations",
+        "bg": "adaptations-doux",
+        "mode": "Clair",
+        "fgHex": "#8a4b0f",
+        "bgHex": "#fbe9d2",
+        "ratio": 5.716914886176797,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "adaptations",
+        "bg": "adaptations-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#6b3a0a",
+        "bgHex": "#fbe9d2",
+        "ratio": 7.914943050160628,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "adaptations",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#8a4b0f",
+        "bgHex": "#ffffff",
+        "ratio": 6.787366656213427,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "adaptations",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#6b3a0a",
+        "bgHex": "#ffffff",
+        "ratio": 9.39696000624122,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "bloquant",
+        "bg": "bloquant-doux",
+        "mode": "Clair",
+        "fgHex": "#a12620",
+        "bgHex": "#f8dedb",
+        "ratio": 5.851290352466194,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "bloquant",
+        "bg": "bloquant-doux",
+        "mode": "Contraste élevé",
+        "fgHex": "#7d1a15",
+        "bgHex": "#f8dedb",
+        "ratio": 8.107381742742815,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "bloquant",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#a12620",
+        "bgHex": "#ffffff",
+        "ratio": 7.46397137236109,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "bloquant",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#7d1a15",
+        "bgHex": "#ffffff",
+        "ratio": 10.341866765700713,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#3b33cc",
+        "ratio": 8.295743729341625,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#2a22a8",
+        "ratio": 11.09532081902355,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "jouable",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#1d6b45",
+        "ratio": 6.478973086295651,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "jouable",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#0b4f30",
+        "ratio": 9.653830107537637,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "adaptations",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#8a4b0f",
+        "ratio": 6.787366656213427,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "adaptations",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#6b3a0a",
+        "ratio": 9.39696000624122,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "bloquant",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#a12620",
+        "ratio": 7.46397137236109,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "bloquant",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#7d1a15",
+        "ratio": 10.341866765700713,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "inverse",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#14161f",
+        "ratio": 18.036680767380904,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "inverse",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#000000",
+        "ratio": 21,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire-survol",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#2f28a8",
+        "ratio": 10.553745464530415,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire-survol",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#1f1980",
+        "ratio": 13.916352406953362,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire-actif",
+        "mode": "Clair",
+        "fgHex": "#ffffff",
+        "bgHex": "#231e82",
+        "ratio": 13.295216776716083,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "texte",
+        "fg": "sur-couleur",
+        "bg": "primaire-actif",
+        "mode": "Contraste élevé",
+        "fgHex": "#ffffff",
+        "bgHex": "#160f5e",
+        "ratio": 16.612943769211654,
+        "need": 4.5,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "fond",
+        "mode": "Clair",
+        "fgHex": "#6b6f7c",
+        "bgHex": "#f7f4ee",
+        "ratio": 4.565582808340941,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "fond",
+        "mode": "Contraste élevé",
+        "fgHex": "#14161f",
+        "bgHex": "#ffffff",
+        "ratio": 18.036680767380904,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#6b6f7c",
+        "bgHex": "#ffffff",
+        "ratio": 5.011953566131689,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#14161f",
+        "bgHex": "#ffffff",
+        "ratio": 18.036680767380904,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "champ",
+        "mode": "Clair",
+        "fgHex": "#6b6f7c",
+        "bgHex": "#f2eee6",
+        "ratio": 4.331258097257466,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "bordure-forte",
+        "bg": "champ",
+        "mode": "Contraste élevé",
+        "fgHex": "#14161f",
+        "bgHex": "#ffffff",
+        "ratio": 18.036680767380904,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "focus",
+        "bg": "fond",
+        "mode": "Clair",
+        "fgHex": "#3b33cc",
+        "bgHex": "#f7f4ee",
+        "ratio": 7.55691457499212,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "focus",
+        "bg": "fond",
+        "mode": "Contraste élevé",
+        "fgHex": "#2a22a8",
+        "bgHex": "#ffffff",
+        "ratio": 11.09532081902355,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "focus",
+        "bg": "surface",
+        "mode": "Clair",
+        "fgHex": "#3b33cc",
+        "bgHex": "#ffffff",
+        "ratio": 8.295743729341625,
+        "need": 3,
+        "pass": true
+      },
+      {
+        "kind": "composant",
+        "fg": "focus",
+        "bg": "surface",
+        "mode": "Contraste élevé",
+        "fgHex": "#2a22a8",
+        "bgHex": "#ffffff",
+        "ratio": 11.09532081902355,
+        "need": 3,
+        "pass": true
+      }
+    ],
+    "failing": []
+  }
+}

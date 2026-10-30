@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit Checkpoint</title>
+<style>
+:root{--bg:#121212;--surface:#1a1c18;--raised:#22251f;--line:#3a4233;--text:#f3e9d2;--dim:#b9b3a2;--brand:#8bc46a;--err:#ff9a8a;--warn:#ffd27a;--mono:'Cascadia Mono',Consolas,'Courier New',monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 var(--mono)}
+a{color:var(--brand)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+header,main,footer{max-width:1100px;margin:0 auto;padding:0 20px}
+header{padding-top:36px}
+.eyebrow{color:var(--brand);letter-spacing:.18em;font-size:12px;margin:0 0 8px}
+h1{font-size:clamp(28px,5vw,44px);margin:0 0 8px;letter-spacing:-.02em}
+h2{font-size:22px;margin:40px 0 8px}
+p{color:var(--dim);margin:0 0 12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:24px 0}
+.card{background:var(--surface);border:1px solid var(--line);padding:14px}
+.card b{display:block;font-size:30px;color:var(--text)}
+.card span{color:var(--dim);font-size:13px}
+.card.err b{color:var(--err)}.card.warn b{color:var(--warn)}.card.ok b{color:var(--brand)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--surface);border:1px solid var(--line)}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--brand)}
+tr.ko td{color:var(--err)}
+.sw{display:inline-block;width:12px;height:12px;border:1px solid var(--dim);margin-right:6px;vertical-align:-1px}
+.screen{background:var(--surface);border:1px solid var(--line);margin:8px 0}
+.screen summary{display:grid;grid-template-columns:28px 1fr auto auto auto;gap:12px;align-items:center;padding:10px 12px;cursor:pointer;list-style:none}
+.screen summary::-webkit-details-marker{display:none}
+.badge{display:grid;place-items:center;width:24px;height:24px;border:2px solid var(--brand);color:var(--brand);font-weight:700}
+.screen.a-corriger .badge{border-color:var(--err);color:var(--err)}
+.screen.a-relire .badge{border-color:var(--warn);color:var(--warn)}
+.s-meta,.s-count{color:var(--dim);font-size:12px}
+.s-status{font-weight:700}
+.issue{border-top:1px solid var(--line);padding:12px 14px 4px 14px;margin:0}
+.issue-head{color:var(--text);margin-bottom:4px}
+.sev{display:inline-grid;place-items:center;width:20px;height:20px;border:2px solid currentColor;margin-right:8px;font-size:12px}
+.issue.error .sev,.issue.error .sev-text{color:var(--err)}
+.issue.warning .sev,.issue.warning .sev-text{color:var(--warn)}
+.issue.info .sev,.issue.info .sev-text{color:var(--dim)}
+.count{background:var(--raised);padding:0 8px;margin:0 6px}
+.why,.how{font-size:13px;margin-bottom:6px}
+.samples{margin:0 0 8px;padding-left:18px;font-size:13px}
+.samples span{color:var(--dim);margin-left:6px}
+.clean{padding:12px 14px;margin:0}
+.page-sum{margin-bottom:12px}
+footer{padding:40px 20px 60px;color:var(--dim);font-size:13px}
+@media (max-width:760px){.screen summary{grid-template-columns:28px 1fr}.s-meta,.s-status,.s-count{grid-column:2}}
+</style>
+</head>
+<body>
+<header>
+<p class="eyebrow">AUDIT DU FICHIER FIGMA</p>
+<h1>Checkpoint, où en sont les maquettes ?</h1>
+<p>Checkpoint, maquettes du PFE, relevé du 2026-10-30. 35 écrans sur 6 pages, 3655 éléments contrôlés, 1075 textes testés en contraste.</p>
+<div class="cards">
+<div class="card ok"><b>24</b><span>écrans conformes</span></div>
+<div class="card warn"><b>8</b><span>écrans à relire</span></div>
+<div class="card err"><b>3</b><span>écrans à corriger</span></div>
+<div class="card err"><b>11</b><span>erreurs</span></div>
+<div class="card warn"><b>40</b><span>points à relire</span></div>
+<div class="card"><b>0</b><span>paires de la palette en échec</span></div>
+</div>
+</header>
+<main>
+<h2>Les règles contrôlées</h2>
+<p>Elles viennent des règles du projet : base Carbon pour les espacements et les cibles, rayons propres à Checkpoint, tout lié à des variables, contraste AA.</p>
+<table><thead><tr><th>Règle</th><th>Niveau</th><th>Pourquoi</th><th>Résultat</th></tr></thead><tbody><tr><td>Couleur libre</td><td>Erreur</td><td>Toute couleur doit être liée à une variable, sauf celles des jaquettes de jeux.</td><td>Aucun</td></tr><tr><td>Contraste insuffisant</td><td>Erreur</td><td>Le texte doit atteindre 4,5:1 (3:1 pour les grands textes), niveau AA.</td><td>Aucun</td></tr><tr><td>Espacement hors échelle</td><td>Erreur</td><td>Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</td><td>4 sur 2 écrans</td></tr><tr><td>Rayon hors échelle</td><td>Erreur</td><td>Les rayons valent 4 (petit), 8 (moyen), 16 (grand) ou une pilule.</td><td>7 sur 1 écran</td></tr><tr><td>Cible trop petite</td><td>Erreur</td><td>Toute zone cliquable fait 48 px au minimum.</td><td>Aucun</td></tr><tr><td>Texte sans style</td><td>Erreur</td><td>Tout texte utilise un style de texte lié aux variables, jamais une taille libre.</td><td>Aucun</td></tr><tr><td>Mauvais mode de typographie</td><td>Erreur</td><td>Un écran mobile est en mode Mobile, une tablette en mode Tablette, un ordinateur en mode Ordinateur.</td><td>Aucun</td></tr><tr><td>Espacement non lié</td><td>À relire</td><td>La valeur est sur l&#39;échelle, mais elle n&#39;est pas liée à une variable espace.</td><td>Aucun</td></tr><tr><td>Rayon non lié</td><td>À relire</td><td>La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</td><td>40 sur 8 écrans</td></tr><tr><td>Texte en capitales</td><td>À relire</td><td>Pas de capitales : surtitres et en-têtes sont en casse normale.</td><td>Aucun</td></tr><tr><td>Écart négatif</td><td>À confirmer</td><td>Un écart négatif fait se chevaucher des éléments, par exemple une pile d&#39;avatars.</td><td>2 sur 2 écrans</td></tr></tbody></table>
+<h2>Écran par écran</h2>
+<p>Ouvre un écran pour voir les éléments concernés. Chaque nom est un lien vers le nœud dans Figma. Le statut est toujours écrit, jamais porté par la couleur seule.</p>
+<section class="page">
+  <h2>01 Vérifier un jeu</h2>
+  <p class="page-sum">12 écrans, 11 erreurs, 28 à relire, 0 à confirmer.</p>
+  <details class="screen a-corriger">
+  <summary>
+    <span class="badge" aria-hidden="true">✕</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-28" target="_blank" rel="noreferrer">1.1 Accueil / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">À corriger</span>
+    <span class="s-count">2 erreurs, 0 à relire</span>
+  </summary>
+  <div class="issue error">
+  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Espacement hors échelle</strong> <span class="count">2</span> <span class="sev-text">Erreur</span></p>
+  <p class="why">Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-64" target="_blank" rel="noreferrer">Hero</a> <span>paddingLeft 240</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-64" target="_blank" rel="noreferrer">Hero</a> <span>paddingRight 240</span></li></ul>
+  <p class="how">À faire : Prends la valeur de l&#39;échelle la plus proche et lie-la à une variable espace.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=10-118" target="_blank" rel="noreferrer">1.3 Fiche jeu / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen a-corriger">
+  <summary>
+    <span class="badge" aria-hidden="true">✕</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-202" target="_blank" rel="noreferrer">1.2 Recherche d&#39;un jeu / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">À corriger</span>
+    <span class="s-count">2 erreurs, 0 à relire</span>
+  </summary>
+  <div class="issue error">
+  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Espacement hors échelle</strong> <span class="count">2</span> <span class="sev-text">Erreur</span></p>
+  <p class="why">Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-236" target="_blank" rel="noreferrer">Recherche</a> <span>paddingLeft 240</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-236" target="_blank" rel="noreferrer">Recherche</a> <span>paddingRight 240</span></li></ul>
+  <p class="how">À faire : Prends la valeur de l&#39;échelle la plus proche et lie-la à une variable espace.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-389" target="_blank" rel="noreferrer">1.4 Profil, introduction / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-460" target="_blank" rel="noreferrer">1.5 Profil, étape 1 Lire et voir / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 7 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">7</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-483" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-484" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-485" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-534" target="_blank" rel="noreferrer">1.6 Profil, étape 3 Tenir et appuyer / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 7 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">7</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-557" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-558" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-559" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-361" target="_blank" rel="noreferrer">1.7 Profil, étape 5 Lumière et mouvement / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 7 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">7</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-384" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-385" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-386" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-429" target="_blank" rel="noreferrer">1.8 Profil, étape 7 Ton matériel / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 7 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">7</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-452" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-453" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-454" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-512" target="_blank" rel="noreferrer">1.9 Profil prêt / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen a-corriger">
+  <summary>
+    <span class="badge" aria-hidden="true">✕</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-605" target="_blank" rel="noreferrer">1.10 Fiche jeu / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À corriger</span>
+    <span class="s-count">7 erreurs, 0 à relire</span>
+  </summary>
+  <div class="issue error">
+  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Rayon hors échelle</strong> <span class="count">7</span> <span class="sev-text">Erreur</span></p>
+  <p class="why">Les rayons valent 4 (petit), 8 (moyen), 16 (grand) ou une pilule.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-659" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-660" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-661" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li></ul>
+  <p class="how">À faire : Utilise la variable rayon la plus proche.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=72-787" target="_blank" rel="noreferrer">1.11 Accueil / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=75-1002" target="_blank" rel="noreferrer">1.12 Recherche d&#39;un jeu / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details>
+</section><section class="page">
+  <h2>02 Trouver un jeu</h2>
+  <p class="page-sum">6 écrans, 0 erreur, 0 à relire, 0 à confirmer.</p>
+  <details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=14-28" target="_blank" rel="noreferrer">2.1 Fiche jeu pas jouable, jeux proches / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=15-122" target="_blank" rel="noreferrer">2.2 Trouver, résultats en liste / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=15-489" target="_blank" rel="noreferrer">2.3 Trouver, résultats en tableau / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=76-609" target="_blank" rel="noreferrer">2.4 Fiche pas jouable / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=77-851" target="_blank" rel="noreferrer">2.5 Trouver, résultats / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=78-1030" target="_blank" rel="noreferrer">2.6 Trouver, filtres / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details>
+</section><section class="page">
+  <h2>03 Comparer des profils</h2>
+  <p class="page-sum">4 écrans, 0 erreur, 0 à relire, 2 à confirmer.</p>
+  <details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=16-28" target="_blank" rel="noreferrer">3.1 Mes profils, compte structure / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <div class="issue info">
+  <p class="issue-head"><span class="sev" aria-hidden="true">i</span><strong>Écart négatif</strong> <span class="count">1</span> <span class="sev-text">À confirmer</span></p>
+  <p class="why">Un écart négatif fait se chevaucher des éléments, par exemple une pile d&#39;avatars.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=16-238" target="_blank" rel="noreferrer">Avatars</a> <span>itemSpacing -10</span></li></ul>
+  <p class="how">À faire : À confirmer : c&#39;est normal pour une pile d&#39;avatars, sinon corrige.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=16-289" target="_blank" rel="noreferrer">3.2 Comparaison de profils sur un jeu / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=79-335" target="_blank" rel="noreferrer">3.3 Mes profils / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <div class="issue info">
+  <p class="issue-head"><span class="sev" aria-hidden="true">i</span><strong>Écart négatif</strong> <span class="count">1</span> <span class="sev-text">À confirmer</span></p>
+  <p class="why">Un écart négatif fait se chevaucher des éléments, par exemple une pile d&#39;avatars.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=79-501" target="_blank" rel="noreferrer">Avatars</a> <span>itemSpacing -8</span></li></ul>
+  <p class="how">À faire : À confirmer : c&#39;est normal pour une pile d&#39;avatars, sinon corrige.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=80-445" target="_blank" rel="noreferrer">3.4 Comparaison de profils / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details>
+</section><section class="page">
+  <h2>04 Contribuer</h2>
+  <p class="page-sum">5 écrans, 0 erreur, 9 à relire, 0 à confirmer.</p>
+  <details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-28" target="_blank" rel="noreferrer">4.1 Contribuer, question 1 / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 3 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">3</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-52" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-53" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-54" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-90" target="_blank" rel="noreferrer">4.2 Contribuer, question 2 / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 3 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">3</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-114" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-115" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-116" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-165" target="_blank" rel="noreferrer">4.3 Contribuer, question 3 / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 3 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">3</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-189" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-190" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-191" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 3</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=17-230" target="_blank" rel="noreferrer">4.4 Contribuer, merci / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=18-112" target="_blank" rel="noreferrer">4.5 Grille de vérification complète / Tablette</a></span>
+    <span class="s-meta">1194 px, mode Tablette</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details>
+</section><section class="page">
+  <h2>05 Studio</h2>
+  <p class="page-sum">4 écrans, 0 erreur, 0 à relire, 0 à confirmer.</p>
+  <details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=19-28" target="_blank" rel="noreferrer">5.1 Espace studio, déclarer les tags / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=20-106" target="_blank" rel="noreferrer">5.2 Espace studio, retours et réponse publique / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=84-369" target="_blank" rel="noreferrer">5.3 Déclarer les tags / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=86-486" target="_blank" rel="noreferrer">5.4 Retours et réponse / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details>
+</section><section class="page">
+  <h2>06 Pages institutionnelles</h2>
+  <p class="page-sum">4 écrans, 0 erreur, 3 à relire, 0 à confirmer.</p>
+  <details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=21-270" target="_blank" rel="noreferrer">6.1 La méthode / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=23-115" target="_blank" rel="noreferrer">6.2 L&#39;association / Ordinateur</a></span>
+    <span class="s-meta">1440 px, mode Ordinateur</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen conforme">
+  <summary>
+    <span class="badge" aria-hidden="true">✓</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=88-354" target="_blank" rel="noreferrer">6.3 La méthode / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
+  </summary>
+  <p class="clean">Aucun constat sur cet écran.</p>
+</details><details class="screen a-relire">
+  <summary>
+    <span class="badge" aria-hidden="true">!</span>
+    <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=89-514" target="_blank" rel="noreferrer">6.4 L&#39;association / Mobile</a></span>
+    <span class="s-meta">390 px, mode Mobile</span>
+    <span class="s-status">À relire</span>
+    <span class="s-count">0 erreur, 3 à relire</span>
+  </summary>
+  <div class="issue warning">
+  <p class="issue-head"><span class="sev" aria-hidden="true">!</span><strong>Rayon non lié</strong> <span class="count">3</span> <span class="sev-text">À relire</span></p>
+  <p class="why">La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</p>
+  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=89-602" target="_blank" rel="noreferrer">Valeur</a> <span>rayon 6</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=89-608" target="_blank" rel="noreferrer">Valeur</a> <span>rayon 6</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=89-614" target="_blank" rel="noreferrer">Valeur</a> <span>rayon 6</span></li></ul>
+  <p class="how">À faire : Lie le rayon à une variable rayon.</p>
+</div>
+</details>
+</section>
+<h2>La palette, dans les deux modes</h2>
+<p>Chaque couleur de texte est testée sur les fonds où elle sert, en mode Clair et en mode Contraste élevé. Les bordures et le focus demandent 3:1.</p>
+<table class="palette"><thead><tr><th>Usage</th><th>Premier plan</th><th>Fond</th><th>Mode</th><th>Contraste</th><th>Minimum</th><th>Résultat</th></tr></thead><tbody><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#f7f4ee"></i>fond</td><td>Clair</td><td>16.43:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#ffffff"></i>fond</td><td>Contraste élevé</td><td>21.00:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>18.04:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>21.00:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#f2eee6"></i>champ</td><td>Clair</td><td>15.59:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#ffffff"></i>champ</td><td>Contraste élevé</td><td>21.00:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#efe9de"></i>survol</td><td>Clair</td><td>14.93:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#ece6da"></i>survol</td><td>Contraste élevé</td><td>16.90:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Clair</td><td>14.60:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Contraste élevé</td><td>17.00:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#dcefe3"></i>jouable-doux</td><td>Clair</td><td>15.03:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#dcefe3"></i>jouable-doux</td><td>Contraste élevé</td><td>17.50:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#fbe9d2"></i>adaptations-doux</td><td>Clair</td><td>15.19:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#fbe9d2"></i>adaptations-doux</td><td>Contraste élevé</td><td>17.69:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#14161f"></i>encre</td><td><i class="sw" style="background:#f8dedb"></i>bloquant-doux</td><td>Clair</td><td>14.14:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#000000"></i>encre</td><td><i class="sw" style="background:#f8dedb"></i>bloquant-doux</td><td>Contraste élevé</td><td>16.46:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#4a4f5e"></i>encre-douce</td><td><i class="sw" style="background:#f7f4ee"></i>fond</td><td>Clair</td><td>7.44:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#262935"></i>encre-douce</td><td><i class="sw" style="background:#ffffff"></i>fond</td><td>Contraste élevé</td><td>14.47:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#4a4f5e"></i>encre-douce</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>8.17:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#262935"></i>encre-douce</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>14.47:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#4a4f5e"></i>encre-douce</td><td><i class="sw" style="background:#f2eee6"></i>champ</td><td>Clair</td><td>7.06:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#262935"></i>encre-douce</td><td><i class="sw" style="background:#ffffff"></i>champ</td><td>Contraste élevé</td><td>14.47:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#4a4f5e"></i>encre-douce</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Clair</td><td>6.61:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#262935"></i>encre-douce</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Contraste élevé</td><td>11.72:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#3b33cc"></i>primaire</td><td><i class="sw" style="background:#f7f4ee"></i>fond</td><td>Clair</td><td>7.56:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#2a22a8"></i>primaire</td><td><i class="sw" style="background:#ffffff"></i>fond</td><td>Contraste élevé</td><td>11.10:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#3b33cc"></i>primaire</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>8.30:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#2a22a8"></i>primaire</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>11.10:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#3b33cc"></i>primaire</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Clair</td><td>6.72:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#2a22a8"></i>primaire</td><td><i class="sw" style="background:#e7e5fb"></i>primaire-doux</td><td>Contraste élevé</td><td>8.98:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#1d6b45"></i>jouable</td><td><i class="sw" style="background:#dcefe3"></i>jouable-doux</td><td>Clair</td><td>5.40:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#0b4f30"></i>jouable</td><td><i class="sw" style="background:#dcefe3"></i>jouable-doux</td><td>Contraste élevé</td><td>8.04:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#1d6b45"></i>jouable</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>6.48:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#0b4f30"></i>jouable</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>9.65:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#8a4b0f"></i>adaptations</td><td><i class="sw" style="background:#fbe9d2"></i>adaptations-doux</td><td>Clair</td><td>5.72:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#6b3a0a"></i>adaptations</td><td><i class="sw" style="background:#fbe9d2"></i>adaptations-doux</td><td>Contraste élevé</td><td>7.91:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#8a4b0f"></i>adaptations</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>6.79:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#6b3a0a"></i>adaptations</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>9.40:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#a12620"></i>bloquant</td><td><i class="sw" style="background:#f8dedb"></i>bloquant-doux</td><td>Clair</td><td>5.85:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#7d1a15"></i>bloquant</td><td><i class="sw" style="background:#f8dedb"></i>bloquant-doux</td><td>Contraste élevé</td><td>8.11:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#a12620"></i>bloquant</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>7.46:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#7d1a15"></i>bloquant</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>10.34:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#3b33cc"></i>primaire</td><td>Clair</td><td>8.30:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#2a22a8"></i>primaire</td><td>Contraste élevé</td><td>11.10:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#1d6b45"></i>jouable</td><td>Clair</td><td>6.48:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#0b4f30"></i>jouable</td><td>Contraste élevé</td><td>9.65:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#8a4b0f"></i>adaptations</td><td>Clair</td><td>6.79:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#6b3a0a"></i>adaptations</td><td>Contraste élevé</td><td>9.40:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#a12620"></i>bloquant</td><td>Clair</td><td>7.46:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#7d1a15"></i>bloquant</td><td>Contraste élevé</td><td>10.34:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#14161f"></i>inverse</td><td>Clair</td><td>18.04:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#000000"></i>inverse</td><td>Contraste élevé</td><td>21.00:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#2f28a8"></i>primaire-survol</td><td>Clair</td><td>10.55:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#1f1980"></i>primaire-survol</td><td>Contraste élevé</td><td>13.92:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#231e82"></i>primaire-actif</td><td>Clair</td><td>13.30:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>texte</td><td><i class="sw" style="background:#ffffff"></i>sur-couleur</td><td><i class="sw" style="background:#160f5e"></i>primaire-actif</td><td>Contraste élevé</td><td>16.61:1</td><td>4.5:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#6b6f7c"></i>bordure-forte</td><td><i class="sw" style="background:#f7f4ee"></i>fond</td><td>Clair</td><td>4.57:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#14161f"></i>bordure-forte</td><td><i class="sw" style="background:#ffffff"></i>fond</td><td>Contraste élevé</td><td>18.04:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#6b6f7c"></i>bordure-forte</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>5.01:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#14161f"></i>bordure-forte</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>18.04:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#6b6f7c"></i>bordure-forte</td><td><i class="sw" style="background:#f2eee6"></i>champ</td><td>Clair</td><td>4.33:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#14161f"></i>bordure-forte</td><td><i class="sw" style="background:#ffffff"></i>champ</td><td>Contraste élevé</td><td>18.04:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#3b33cc"></i>focus</td><td><i class="sw" style="background:#f7f4ee"></i>fond</td><td>Clair</td><td>7.56:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#2a22a8"></i>focus</td><td><i class="sw" style="background:#ffffff"></i>fond</td><td>Contraste élevé</td><td>11.10:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#3b33cc"></i>focus</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Clair</td><td>8.30:1</td><td>3:1</td><td>✓ Réussi</td></tr><tr class="ok">
+<td>composant</td><td><i class="sw" style="background:#2a22a8"></i>focus</td><td><i class="sw" style="background:#ffffff"></i>surface</td><td>Contraste élevé</td><td>11.10:1</td><td>3:1</td><td>✓ Réussi</td></tr></tbody></table>
+</main>
+<footer>
+<p>Limites : le contrôle porte sur les écrans numérotés des pages 01 à 06. L'intérieur des composants est audité à part, sur leur planche. Les jaquettes de jeux gardent des couleurs libres, c'est voulu. Les sigles courts en capitales (PS5, PC) ne sont pas signalés.</p>
+</footer>
+</body>
+</html>
