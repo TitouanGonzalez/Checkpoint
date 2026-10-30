@@ -138,6 +138,7 @@ test('le rapport totalise les écrans, les erreurs et les règles', () => {
   assert.equal(rep.totals.aCorriger, 1);
   assert.equal(rep.totals.errors, 4);
   assert.equal(rep.perRule.couleur.count, 4);
+  assert.equal(rep.tokens.encre, '#000000');
 });
 
 test('la page de rapport échappe le HTML et contient les liens Figma', () => {

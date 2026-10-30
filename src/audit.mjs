@@ -183,6 +183,7 @@ export function buildReport(pages, variables, meta = {}) {
     }
   return {
     meta,
+    tokens: Object.fromEntries(variables.map((v) => [v.name.replace(/^couleur\//, ''), v[Object.keys(v).find((k) => k !== 'name')]])),
     totals: {
       pages: outPages.length,
       screens: all.length,
