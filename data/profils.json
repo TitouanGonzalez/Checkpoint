@@ -1,0 +1,17 @@
+{
+  "profils": [
+    {
+      "id": "titouan",
+      "nom": "Titouan",
+      "plateformes": ["Xbox Series", "PC"],
+      "materiel": ["manette adaptative Xbox"],
+      "besoins": [
+        { "id": "petits-textes", "niveau": "indispensable" },
+        { "id": "dialogues", "niveau": "indispensable" },
+        { "id": "une-main", "niveau": "indispensable" },
+        { "id": "flashs", "niveau": "indispensable" },
+        { "id": "sans-maintien", "niveau": "utile" }
+      ]
+    }
+  ]
+}

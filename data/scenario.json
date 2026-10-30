@@ -1,0 +1,86 @@
+{
+  "note": "Scénario de démonstration. Les confirmations, contestations et sessions CapGame sont inventées pour le projet. Elles ne sont jamais prêtées à un vrai studio ni à de vrais joueurs.",
+  "retours": [
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "plateforme": "PC",
+      "besoin": "flashs",
+      "confirmations": 4
+    },
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "plateforme": "Xbox Series",
+      "besoin": "flashs",
+      "confirmations": 4
+    },
+    {
+      "jeu": "baldurs-gate-3",
+      "plateforme": "PC",
+      "besoin": "une-main",
+      "session": "confirme"
+    },
+    {
+      "jeu": "baldurs-gate-3",
+      "plateforme": "PC",
+      "besoin": "flashs",
+      "confirmations": 3
+    },
+    {
+      "jeu": "assassins-creed-shadows",
+      "plateforme": "PC",
+      "tag": "Full Input Remapping",
+      "contestations": 5
+    },
+    {
+      "jeu": "assassins-creed-shadows",
+      "plateforme": "Xbox Series",
+      "tag": "Full Input Remapping",
+      "contestations": 5
+    }
+  ],
+  "compensations": [
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "plateforme": "PC",
+      "besoin": "une-main",
+      "via": "reglage",
+      "label": "Mode Histoire : fenêtres d'esquive et de parade élargies",
+      "confirmations": 3
+    },
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "plateforme": "PC",
+      "besoin": "une-main",
+      "via": "materiel",
+      "materiel": "manette adaptative Xbox",
+      "label": "Manette adaptative Xbox, pas de remapping déclaré",
+      "confirmations": 3
+    },
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "plateforme": "Xbox Series",
+      "besoin": "une-main",
+      "via": "materiel",
+      "materiel": "manette adaptative Xbox",
+      "label": "Manette adaptative Xbox, pas de remapping déclaré",
+      "confirmations": 3
+    }
+  ],
+  "attendu": [
+    {
+      "jeu": "clair-obscur-expedition-33",
+      "verdict": "avec-adaptations",
+      "source": "Fiche d'exemple des maquettes (1.3 et 1.10)"
+    },
+    {
+      "jeu": "elden-ring",
+      "verdict": "pas-jouable",
+      "source": "Fiche pas jouable des maquettes (2.1 et 2.4)"
+    },
+    {
+      "jeu": "baldurs-gate-3",
+      "verdict": "jouable",
+      "source": "Liste de résultats des maquettes (2.2)"
+    }
+  ]
+}

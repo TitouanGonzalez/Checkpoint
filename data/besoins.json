@@ -1,0 +1,10 @@
+{
+  "note": "Les liens entre besoins et tags viennent de la page La méthode (6.1) pour la main unique, et du bon sens pour les autres : à valider avant de les montrer comme officiels.",
+  "besoins": [
+    { "id": "petits-textes", "nom": "Lire les petits textes", "couvertPar": ["Large Text", "Clear Text"], "aidePar": [] },
+    { "id": "dialogues", "nom": "Suivre les dialogues", "couvertPar": ["Large & Clear Subtitles"], "aidePar": ["Multiple Volume Controls"] },
+    { "id": "une-main", "nom": "Jouer d'une seule main", "couvertPar": ["Full Input Remapping", "Playable with Buttons Only"], "aidePar": ["Playable without Button Holds", "Playable without Rapid Button Presses"] },
+    { "id": "flashs", "nom": "Éviter les flashs", "couvertPar": [], "aidePar": [] },
+    { "id": "sans-maintien", "nom": "Ne pas maintenir de bouton", "couvertPar": ["Playable without Button Holds"], "aidePar": ["Full Input Remapping"] }
+  ]
+}

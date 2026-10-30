@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulateur de verdict Checkpoint</title>
+<style>
+:root{--fond:#f7f4ee;--surface:#ffffff;--encre:#14161f;--encre-douce:#4a4f5e;--ligne:#dcd7cc;--primaire:#3b33cc;--primaire-doux:#e7e5fb;--jouable:#1d6b45;--jouable-doux:#dcefe3;--adaptations:#8a4b0f;--adaptations-doux:#fbe9d2;--bloquant:#a12620;--bloquant-doux:#f8dedb;--champ:#f2eee6;--font:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',system-ui,'Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--encre);font:17px/1.55 var(--font)}
+a{color:var(--primaire);font-weight:600}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--primaire);outline-offset:4px}
+header,main,footer{max-width:1120px;margin:0 auto;padding:0 24px}
+header{padding-top:48px}
+.eyebrow{color:var(--primaire);font-weight:700;font-size:15px;margin:0 0 8px}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.15;margin:0 0 12px;font-weight:800}
+h2{font-size:28px;line-height:1.2;margin:48px 0 8px;font-weight:800}
+p{color:var(--encre-douce);margin:0 0 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:32px 0}
+.card{background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:16px 20px}
+.card b{display:block;font-size:40px;line-height:1.1;font-weight:800;color:var(--encre)}
+.card span{color:var(--encre-douce);font-size:15px}
+.card.ok{background:var(--jouable-doux)}.card.ok b{color:var(--jouable)}
+.card.warn{background:var(--adaptations-doux)}.card.warn b{color:var(--adaptations)}
+.card.err{background:var(--bloquant-doux)}.card.err b{color:var(--bloquant)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;overflow:hidden}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--ligne);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{background:var(--champ);color:var(--encre);font-weight:700}
+tr.ko td{color:var(--bloquant);font-weight:600}
+.sw{display:inline-block;width:14px;height:14px;border:1px solid var(--encre-douce);border-radius:4px;margin-right:8px;vertical-align:-2px}
+.screen{background:var(--surface);border:1px solid var(--ligne);border-radius:16px;margin:12px 0;overflow:hidden}
+.screen summary{display:grid;grid-template-columns:40px 1fr auto auto auto;gap:16px;align-items:center;min-height:56px;padding:8px 16px;cursor:pointer;list-style:none}
+.screen summary::-webkit-details-marker{display:none}
+.screen[open] summary{border-bottom:1px solid var(--ligne)}
+.badge{display:grid;place-items:center;width:32px;height:32px;border-radius:999px;background:var(--jouable-doux);color:var(--jouable);font-weight:800}
+.screen.a-corriger .badge{background:var(--bloquant-doux);color:var(--bloquant)}
+.screen.a-relire .badge{background:var(--adaptations-doux);color:var(--adaptations)}
+.s-name a{font-weight:700}
+.s-meta,.s-count{color:var(--encre-douce);font-size:15px}
+.s-status{font-weight:800}
+.screen.conforme .s-status{color:var(--jouable)}.screen.a-relire .s-status{color:var(--adaptations)}.screen.a-corriger .s-status{color:var(--bloquant)}
+.issue{border-top:1px solid var(--ligne);padding:16px 20px 8px}
+.issue:first-of-type{border-top:0}
+.issue-head{color:var(--encre);margin-bottom:4px}
+.sev{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:999px;margin-right:8px;font-size:14px;font-weight:800}
+.issue.error .sev{background:var(--bloquant-doux);color:var(--bloquant)}
+.issue.warning .sev{background:var(--adaptations-doux);color:var(--adaptations)}
+.issue.info .sev{background:var(--primaire-doux);color:var(--primaire)}
+.sev-text{font-weight:700;margin-left:4px}
+.issue.error .sev-text{color:var(--bloquant)}.issue.warning .sev-text{color:var(--adaptations)}.issue.info .sev-text{color:var(--primaire)}
+.count{background:var(--champ);border-radius:999px;padding:2px 10px;margin:0 6px;font-weight:700}
+.why,.how{font-size:15px;margin-bottom:8px}
+.samples{margin:0 0 12px;padding-left:20px;font-size:15px}
+.samples span{color:var(--encre-douce);margin-left:8px}
+.clean{padding:16px 20px;margin:0}
+.page-sum{margin-bottom:16px}
+footer{padding:48px 24px 72px}
+footer p{font-size:15px}
+@media (max-width:760px){.screen summary{grid-template-columns:40px 1fr}.s-meta,.s-status,.s-count{grid-column:2}}
+
+.topnav{display:flex;gap:8px;margin:0 0 28px;flex-wrap:wrap}
+.topnav a{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border:1px solid var(--ligne);border-radius:8px;background:var(--surface);text-decoration:none;color:var(--encre)}
+.topnav a[aria-current='page']{background:var(--primaire);border-color:var(--primaire);color:#fff}
+
+.controles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0}
+.champ{display:flex;flex-direction:column;gap:6px;font-weight:700;color:var(--encre)}
+select{min-height:48px;padding:0 12px;border:1px solid var(--encre-douce);border-radius:8px;background:var(--champ);color:var(--encre);font:inherit;font-weight:400}
+select:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--primaire);outline-offset:4px}
+fieldset.besoins-profil{border:1px solid var(--ligne);border-radius:16px;background:var(--surface);padding:16px 20px;display:grid;gap:12px;margin:0}
+fieldset legend{font-weight:800;padding:0 8px}
+.case{display:flex;align-items:center;gap:12px;min-height:48px}
+.case input{width:24px;height:24px}
+.verdict{border-radius:16px;padding:20px 24px;margin:8px 0 24px;border:2px solid var(--ligne);background:var(--surface)}
+.verdict p{margin:0 0 8px;color:var(--encre)}
+.verdict-ligne{display:flex;align-items:center;gap:12px;font-size:28px}
+.verdict.jouable{background:var(--jouable-doux);border-color:var(--jouable)}
+.verdict.avec-adaptations{background:var(--adaptations-doux);border-color:var(--adaptations)}
+.verdict.pas-jouable{background:var(--bloquant-doux);border-color:var(--bloquant)}
+.verdict.aucun{background:var(--champ)}
+.puce{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;font-weight:800;font-size:15px;background:var(--champ);color:var(--encre)}
+.puce.grosse{width:40px;height:40px;font-size:22px;color:#fff}
+.jouable .puce.grosse{background:var(--jouable)}.avec-adaptations .puce.grosse{background:var(--adaptations)}.pas-jouable .puce.grosse{background:var(--bloquant)}.aucun .puce.grosse{background:var(--encre-douce)}
+.incomplet{font-weight:700}
+ul.besoins{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.besoin{background:var(--surface);border:1px solid var(--ligne);border-left-width:6px;border-radius:16px;padding:16px 20px}
+.besoin p{margin:0 0 6px;color:var(--encre-douce)}
+.besoin-tete{display:flex;align-items:center;flex-wrap:wrap;gap:10px;color:var(--encre)!important}
+.etiquette{background:var(--champ);border-radius:999px;padding:2px 10px;font-size:14px}
+.statut{margin-left:auto;font-weight:800}
+.besoin.couvert{border-left-color:var(--jouable)}.besoin.couvert .puce,.besoin.couvert .statut{background:var(--jouable-doux);color:var(--jouable)}
+.besoin.compense{border-left-color:var(--adaptations)}.besoin.compense .puce,.besoin.compense .statut{background:var(--adaptations-doux);color:var(--adaptations)}
+.besoin.bloquant{border-left-color:var(--bloquant)}.besoin.bloquant .puce,.besoin.bloquant .statut{background:var(--bloquant-doux);color:var(--bloquant)}
+.besoin.inconnu{border-left-color:var(--encre-douce)}
+.besoin .statut{background:none!important}
+.detail{font-size:15px}
+.matrice td,.matrice th{padding:8px 12px}
+.cellule{width:100%;min-height:48px;text-align:left;border:1px solid var(--ligne);border-radius:8px;background:var(--surface);color:var(--encre);font:inherit;cursor:pointer;padding:6px 12px}
+.cellule.jouable{background:var(--jouable-doux)}.cellule.avec-adaptations{background:var(--adaptations-doux)}.cellule.pas-jouable{background:var(--bloquant-doux)}
+.cellule:hover{border-color:var(--primaire)}
+tr.ok td:nth-child(5){color:var(--jouable);font-weight:700}
+@media (max-width:760px){.verdict-ligne{font-size:22px}.statut{margin-left:0}}
+</style>
+<style>:root{--fond:#f7f4ee;--surface:#ffffff;--encre:#14161f;--encre-douce:#4a4f5e;--ligne:#dcd7cc;--primaire:#3b33cc;--primaire-doux:#e7e5fb;--jouable:#1d6b45;--jouable-doux:#dcefe3;--adaptations:#8a4b0f;--adaptations-doux:#fbe9d2;--bloquant:#a12620;--bloquant-doux:#f8dedb;--champ:#f2eee6}</style>
+</head>
+<body>
+<header>
+<nav class="topnav" aria-label="Pages du rapport"><a href="index.html">Audit des maquettes</a><a href="verdict.html" aria-current="page">Simulateur de verdict</a></nav>
+<p class="eyebrow">La méthode, appliquée pour de vrai</p>
+<h1>Quel verdict pour quel profil ?</h1>
+<p>Ce simulateur applique les règles de la page La méthode (6.1) aux relevés des boutiques du 26 octobre 2026. Choisis un jeu, une plateforme et des besoins : le verdict, la certitude et la raison de chaque besoin se calculent sous tes yeux.</p>
+<p id="regles"></p>
+</header>
+<main>
+<h2>Choisir</h2>
+<div id="controles"></div>
+<h2>Résultat</h2>
+<div id="resultat" tabindex="-1"></div>
+<h2>Tous les jeux, pour ce profil</h2>
+<p>Clique sur une case pour voir le détail.</p>
+<div id="matrice" style="overflow-x:auto"></div>
+<h2>Écarts avec les maquettes</h2>
+<p>Les maquettes affirment un verdict pour trois jeux. Voici ce que le moteur calcule avec les mêmes règles, sur chaque plateforme du profil. Un écart n'est pas forcément une erreur du moteur : il peut montrer une phrase des maquettes à préciser.</p>
+<div id="ecarts" style="overflow-x:auto"></div>
+</main>
+<footer>
+<p id="scenario-note"></p>
+<p id="besoins-note"></p>
+<p>Décisions du moteur : un besoin sans tag ni retour de joueurs reste inconnu et rend le verdict incomplet. Un besoin dont la source est lue mais ne déclare rien de couvrant est bloquant. À égalité de confirmations et de contestations, la contestation l'emporte.</p>
+</footer>
+<script type="module" src="client-verdict.js"></script>
+</body>
+</html>

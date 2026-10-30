@@ -2,7 +2,9 @@
 
 Un petit outil qui lit le fichier Figma de Checkpoint (le service qui dit à un joueur en situation de handicap si un jeu est jouable pour lui avant l'achat) et vérifie, écran par écran, les règles que le projet s'est données. Le résultat est une page de rapport, avec un lien direct vers chaque élément à corriger dans Figma.
 
-Il ne modifie jamais le fichier Figma : il le lit seulement.
+Il contient aussi un simulateur de verdict, qui applique la méthode de Checkpoint à de vrais jeux. Les deux pages se lancent ensemble.
+
+L'audit lit le fichier Figma sans le modifier. Les corrections du 30 octobre 2026 (marges des accueils ordinateur, rayons de la jauge sur la fiche mobile) ont été faites à part, dans Figma, puis relevées de nouveau : plus aucune erreur sur les 35 écrans.
 
 ## Voir le rapport
 
@@ -24,7 +26,7 @@ npm start
 
 ### 3. Ouvrir
 
-Va sur http://127.0.0.1:4312. Laisse le terminal ouvert, la page s'arrête quand tu le fermes (ou avec Ctrl+C).
+Va sur http://127.0.0.1:4312 (audit des maquettes) ou http://127.0.0.1:4312/verdict.html (simulateur de verdict). Laisse le terminal ouvert, la page s'arrête quand tu le fermes (ou avec Ctrl+C).
 
 ### Si ça ne marche pas
 
@@ -53,6 +55,28 @@ La palette est aussi testée en entier, dans les deux modes (Clair et Contraste 
 
 Un écran est "conforme" sans aucune erreur ni relecture, "à relire" avec seulement des points à relire, "à corriger" dès qu'il a une erreur. Le statut est toujours écrit en toutes lettres, jamais porté par la couleur seule.
 
+## Le simulateur de verdict
+
+Il applique les règles de la page La méthode (6.1 des maquettes) dans du code, et le montre sur les 8 jeux du relevé des boutiques du 26 octobre 2026 (Steam, Xbox, pages Ubisoft).
+
+- On ne regarde que les besoins indispensables. Les besoins utiles sont affichés, sans changer le verdict.
+- Jouable : tous les besoins indispensables sont couverts par le jeu.
+- Jouable avec adaptations : un besoin n'est pas couvert, mais un réglage, un logiciel ou le matériel de la personne le compense, et c'est vérifié.
+- Pas jouable en l'état : un besoin indispensable n'est pas couvert et rien de vérifié ne le compense.
+- Une information est vérifiée après 3 confirmations, contestée après 3 contestations, et le studio est prévenu à 5. Une session CapGame suffit à elle seule.
+- La certitude est la part des besoins indispensables dont la réponse est vérifiée : élevée à partir de 75 %, moyenne de 40 à 74 %, faible en dessous.
+
+Décisions que les maquettes ne tranchaient pas, à valider :
+
+- Un besoin sans tag ni retour de joueurs (par exemple éviter les flashs) reste inconnu. Le verdict est alors signalé incomplet, jamais arrondi.
+- Si la source d'une plateforme est lue et ne déclare rien qui couvre le besoin, le besoin est bloquant. Sans source du tout, il est inconnu.
+- À égalité de confirmations et de contestations, la contestation l'emporte.
+- Le verdict vaut pour une plateforme : PC lit Steam, Xbox Series lit Xbox, et les pages Ubisoft comptent pour les deux.
+
+La page compare aussi le moteur aux verdicts affirmés dans les maquettes. Sur PC, les trois cas (Clair Obscur, Elden Ring, Baldur's Gate 3) sont identiques. Sur Xbox Series, il reste deux écarts : Clair Obscur et Baldur's Gate 3 ne déclarent presque rien côté Xbox, donc le moteur les juge non jouables pour ce profil, alors que les maquettes les montrent jouables. C'est une phrase des maquettes à préciser, ou des retours de joueurs à ajouter.
+
+Les liens entre besoins et tags sont dans `data/besoins.json` : seul celui de la main unique vient de la page La méthode, les autres sont des propositions. Les confirmations, contestations et sessions de `data/scenario.json` sont un scénario, jamais prêtées à un vrai studio.
+
 ## Mettre le rapport à jour
 
 L'outil a deux parties. Une extraction lit le fichier Figma, un vérificateur en Node classe les constats et écrit la page.
@@ -70,12 +94,12 @@ L'extraction ne parcourt pas l'intérieur des instances de composants : un compo
 npm test
 ```
 
-Les tests couvrent le calcul des contrastes, le classement des constats, les cas particuliers (sigles, écarts négatifs), l'échappement du HTML et le chargement des vraies données.
+Les tests couvrent le calcul des contrastes, le classement des constats, les cas particuliers (sigles, écarts négatifs), l'échappement du HTML, les états des informations, chaque cas du verdict, la certitude, la lecture du relevé des jeux et les trois verdicts de référence des maquettes.
 
 ## Organisation du dépôt
 
 - `figma/` : les deux scripts de lecture à lancer dans Figma.
-- `data/` : le relevé brut (écrans, variables, date).
-- `src/` : le contraste, les règles, le rapport et le petit serveur.
+- `data/` : le relevé brut de Figma (écrans, variables, date), le relevé des jeux (`jeux.csv`), les besoins, le profil et le scénario.
+- `src/` : le contraste, les règles de l'audit, le moteur de verdict (`verdict.mjs`, `jeux.mjs`), les pages et le petit serveur.
 - `tests/` : les tests.
 - `report/` : la page générée (recréée à chaque `npm start`).

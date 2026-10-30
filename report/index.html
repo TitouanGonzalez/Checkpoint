@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Audit Checkpoint</title>
 <style>
+
 :root{--fond:#f7f4ee;--surface:#ffffff;--encre:#14161f;--encre-douce:#4a4f5e;--ligne:#dcd7cc;--primaire:#3b33cc;--primaire-doux:#e7e5fb;--jouable:#1d6b45;--jouable-doux:#dcefe3;--adaptations:#8a4b0f;--adaptations-doux:#fbe9d2;--bloquant:#a12620;--bloquant-doux:#f8dedb;--champ:#f2eee6;--font:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',system-ui,'Segoe UI',Arial,sans-serif}
 *{box-sizing:border-box}
 body{margin:0;background:var(--fond);color:var(--encre);font:17px/1.55 var(--font)}
@@ -58,19 +59,25 @@ tr.ko td{color:var(--bloquant);font-weight:600}
 footer{padding:48px 24px 72px}
 footer p{font-size:15px}
 @media (max-width:760px){.screen summary{grid-template-columns:40px 1fr}.s-meta,.s-status,.s-count{grid-column:2}}
+
+.topnav{display:flex;gap:8px;margin:0 0 28px;flex-wrap:wrap}
+.topnav a{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border:1px solid var(--ligne);border-radius:8px;background:var(--surface);text-decoration:none;color:var(--encre)}
+.topnav a[aria-current='page']{background:var(--primaire);border-color:var(--primaire);color:#fff}
+
 </style>
 <style>:root{--fond:#f7f4ee;--surface:#ffffff;--encre:#14161f;--encre-douce:#4a4f5e;--ligne:#dcd7cc;--primaire:#3b33cc;--primaire-doux:#e7e5fb;--jouable:#1d6b45;--jouable-doux:#dcefe3;--adaptations:#8a4b0f;--adaptations-doux:#fbe9d2;--bloquant:#a12620;--bloquant-doux:#f8dedb;--champ:#f2eee6}</style>
 </head>
 <body>
 <header>
+<nav class="topnav" aria-label="Pages du rapport"><a href="index.html" aria-current="page">Audit des maquettes</a><a href="verdict.html">Simulateur de verdict</a></nav>
 <p class="eyebrow">Audit du fichier Figma</p>
 <h1>Checkpoint, où en sont les maquettes ?</h1>
 <p>Checkpoint, maquettes du PFE, relevé du 2026-10-30. 35 écrans sur 6 pages, 3655 éléments contrôlés, 1075 textes testés en contraste.</p>
 <div class="cards">
-<div class="card ok"><b>24</b><span>écrans conformes</span></div>
+<div class="card ok"><b>27</b><span>écrans conformes</span></div>
 <div class="card warn"><b>8</b><span>écrans à relire</span></div>
-<div class="card err"><b>3</b><span>écrans à corriger</span></div>
-<div class="card err"><b>11</b><span>erreurs</span></div>
+<div class="card err"><b>0</b><span>écrans à corriger</span></div>
+<div class="card err"><b>0</b><span>erreurs</span></div>
 <div class="card warn"><b>40</b><span>points à relire</span></div>
 <div class="card"><b>0</b><span>paires de la palette en échec</span></div>
 </div>
@@ -78,26 +85,21 @@ footer p{font-size:15px}
 <main>
 <h2>Les règles contrôlées</h2>
 <p>Elles viennent des règles du projet : base Carbon pour les espacements et les cibles, rayons propres à Checkpoint, tout lié à des variables, contraste AA.</p>
-<table><thead><tr><th>Règle</th><th>Niveau</th><th>Pourquoi</th><th>Résultat</th></tr></thead><tbody><tr><td>Couleur libre</td><td>Erreur</td><td>Toute couleur doit être liée à une variable, sauf celles des jaquettes de jeux.</td><td>Aucun</td></tr><tr><td>Contraste insuffisant</td><td>Erreur</td><td>Le texte doit atteindre 4,5:1 (3:1 pour les grands textes), niveau AA.</td><td>Aucun</td></tr><tr><td>Espacement hors échelle</td><td>Erreur</td><td>Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</td><td>4 sur 2 écrans</td></tr><tr><td>Rayon hors échelle</td><td>Erreur</td><td>Les rayons valent 4 (petit), 8 (moyen), 16 (grand) ou une pilule.</td><td>7 sur 1 écran</td></tr><tr><td>Cible trop petite</td><td>Erreur</td><td>Toute zone cliquable fait 48 px au minimum.</td><td>Aucun</td></tr><tr><td>Texte sans style</td><td>Erreur</td><td>Tout texte utilise un style de texte lié aux variables, jamais une taille libre.</td><td>Aucun</td></tr><tr><td>Mauvais mode de typographie</td><td>Erreur</td><td>Un écran mobile est en mode Mobile, une tablette en mode Tablette, un ordinateur en mode Ordinateur.</td><td>Aucun</td></tr><tr><td>Espacement non lié</td><td>À relire</td><td>La valeur est sur l&#39;échelle, mais elle n&#39;est pas liée à une variable espace.</td><td>Aucun</td></tr><tr><td>Rayon non lié</td><td>À relire</td><td>La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</td><td>40 sur 8 écrans</td></tr><tr><td>Texte en capitales</td><td>À relire</td><td>Pas de capitales : surtitres et en-têtes sont en casse normale.</td><td>Aucun</td></tr><tr><td>Écart négatif</td><td>À confirmer</td><td>Un écart négatif fait se chevaucher des éléments, par exemple une pile d&#39;avatars.</td><td>2 sur 2 écrans</td></tr></tbody></table>
+<table><thead><tr><th>Règle</th><th>Niveau</th><th>Pourquoi</th><th>Résultat</th></tr></thead><tbody><tr><td>Couleur libre</td><td>Erreur</td><td>Toute couleur doit être liée à une variable, sauf celles des jaquettes de jeux.</td><td>Aucun</td></tr><tr><td>Contraste insuffisant</td><td>Erreur</td><td>Le texte doit atteindre 4,5:1 (3:1 pour les grands textes), niveau AA.</td><td>Aucun</td></tr><tr><td>Espacement hors échelle</td><td>Erreur</td><td>Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</td><td>Aucun</td></tr><tr><td>Rayon hors échelle</td><td>Erreur</td><td>Les rayons valent 4 (petit), 8 (moyen), 16 (grand) ou une pilule.</td><td>Aucun</td></tr><tr><td>Cible trop petite</td><td>Erreur</td><td>Toute zone cliquable fait 48 px au minimum.</td><td>Aucun</td></tr><tr><td>Texte sans style</td><td>Erreur</td><td>Tout texte utilise un style de texte lié aux variables, jamais une taille libre.</td><td>Aucun</td></tr><tr><td>Mauvais mode de typographie</td><td>Erreur</td><td>Un écran mobile est en mode Mobile, une tablette en mode Tablette, un ordinateur en mode Ordinateur.</td><td>Aucun</td></tr><tr><td>Espacement non lié</td><td>À relire</td><td>La valeur est sur l&#39;échelle, mais elle n&#39;est pas liée à une variable espace.</td><td>Aucun</td></tr><tr><td>Rayon non lié</td><td>À relire</td><td>La valeur est correcte (ou une pilule), mais elle n&#39;est pas liée à une variable de rayon.</td><td>40 sur 8 écrans</td></tr><tr><td>Texte en capitales</td><td>À relire</td><td>Pas de capitales : surtitres et en-têtes sont en casse normale.</td><td>Aucun</td></tr><tr><td>Écart négatif</td><td>À confirmer</td><td>Un écart négatif fait se chevaucher des éléments, par exemple une pile d&#39;avatars.</td><td>2 sur 2 écrans</td></tr></tbody></table>
 <h2>Écran par écran</h2>
 <p>Ouvre un écran pour voir les éléments concernés. Chaque nom est un lien vers le nœud dans Figma. Le statut est toujours écrit, jamais porté par la couleur seule.</p>
 <section class="page">
   <h2>01 Vérifier un jeu</h2>
-  <p class="page-sum">12 écrans, 11 erreurs, 28 à relire, 0 à confirmer.</p>
-  <details class="screen a-corriger">
+  <p class="page-sum">12 écrans, 0 erreur, 28 à relire, 0 à confirmer.</p>
+  <details class="screen conforme">
   <summary>
-    <span class="badge" aria-hidden="true">✕</span>
+    <span class="badge" aria-hidden="true">✓</span>
     <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-28" target="_blank" rel="noreferrer">1.1 Accueil / Ordinateur</a></span>
     <span class="s-meta">1440 px, mode Ordinateur</span>
-    <span class="s-status">À corriger</span>
-    <span class="s-count">2 erreurs, 0 à relire</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
   </summary>
-  <div class="issue error">
-  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Espacement hors échelle</strong> <span class="count">2</span> <span class="sev-text">Erreur</span></p>
-  <p class="why">Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</p>
-  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-64" target="_blank" rel="noreferrer">Hero</a> <span>paddingLeft 240</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=8-64" target="_blank" rel="noreferrer">Hero</a> <span>paddingRight 240</span></li></ul>
-  <p class="how">À faire : Prends la valeur de l&#39;échelle la plus proche et lie-la à une variable espace.</p>
-</div>
+  <p class="clean">Aucun constat sur cet écran.</p>
 </details><details class="screen conforme">
   <summary>
     <span class="badge" aria-hidden="true">✓</span>
@@ -107,20 +109,15 @@ footer p{font-size:15px}
     <span class="s-count">0 erreur, 0 à relire</span>
   </summary>
   <p class="clean">Aucun constat sur cet écran.</p>
-</details><details class="screen a-corriger">
+</details><details class="screen conforme">
   <summary>
-    <span class="badge" aria-hidden="true">✕</span>
+    <span class="badge" aria-hidden="true">✓</span>
     <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-202" target="_blank" rel="noreferrer">1.2 Recherche d&#39;un jeu / Ordinateur</a></span>
     <span class="s-meta">1440 px, mode Ordinateur</span>
-    <span class="s-status">À corriger</span>
-    <span class="s-count">2 erreurs, 0 à relire</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
   </summary>
-  <div class="issue error">
-  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Espacement hors échelle</strong> <span class="count">2</span> <span class="sev-text">Erreur</span></p>
-  <p class="why">Les marges et écarts suivent l&#39;échelle Carbon : 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 160. Seule exception : la marge de 120 des écrans ordinateur.</p>
-  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-236" target="_blank" rel="noreferrer">Recherche</a> <span>paddingLeft 240</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=12-236" target="_blank" rel="noreferrer">Recherche</a> <span>paddingRight 240</span></li></ul>
-  <p class="how">À faire : Prends la valeur de l&#39;échelle la plus proche et lie-la à une variable espace.</p>
-</div>
+  <p class="clean">Aucun constat sur cet écran.</p>
 </details><details class="screen conforme">
   <summary>
     <span class="badge" aria-hidden="true">✓</span>
@@ -195,20 +192,15 @@ footer p{font-size:15px}
     <span class="s-count">0 erreur, 0 à relire</span>
   </summary>
   <p class="clean">Aucun constat sur cet écran.</p>
-</details><details class="screen a-corriger">
+</details><details class="screen conforme">
   <summary>
-    <span class="badge" aria-hidden="true">✕</span>
+    <span class="badge" aria-hidden="true">✓</span>
     <span class="s-name"><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-605" target="_blank" rel="noreferrer">1.10 Fiche jeu / Mobile</a></span>
     <span class="s-meta">390 px, mode Mobile</span>
-    <span class="s-status">À corriger</span>
-    <span class="s-count">7 erreurs, 0 à relire</span>
+    <span class="s-status">Conforme</span>
+    <span class="s-count">0 erreur, 0 à relire</span>
   </summary>
-  <div class="issue error">
-  <p class="issue-head"><span class="sev" aria-hidden="true">✕</span><strong>Rayon hors échelle</strong> <span class="count">7</span> <span class="sev-text">Erreur</span></p>
-  <p class="why">Les rayons valent 4 (petit), 8 (moyen), 16 (grand) ou une pilule.</p>
-  <ul class="samples"><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-659" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-660" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li><li><a href="https://www.figma.com/design/2uqWKJjv2XY5Z5brHiiXVc?node-id=13-661" target="_blank" rel="noreferrer">Rectangle</a> <span>rayon 2</span></li></ul>
-  <p class="how">À faire : Utilise la variable rayon la plus proche.</p>
-</div>
+  <p class="clean">Aucun constat sur cet écran.</p>
 </details><details class="screen conforme">
   <summary>
     <span class="badge" aria-hidden="true">✓</span>

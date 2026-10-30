@@ -2,7 +2,8 @@
   "meta": {
     "fileKey": "2uqWKJjv2XY5Z5brHiiXVc",
     "fileName": "Checkpoint, maquettes du PFE",
-    "extractedAt": "2026-10-30"
+    "extractedAt": "2026-10-30",
+    "corrections": "Marges 240 remplacées par 120 avec colonne de 960 centrée (1.1, 1.2), rayons de 2 liés à rayon/petit (1.10)."
   },
   "tokens": {
     "fond": "#f7f4ee",
@@ -36,27 +37,19 @@
   "totals": {
     "pages": 6,
     "screens": 35,
-    "conformes": 24,
+    "conformes": 27,
     "aRelire": 8,
-    "aCorriger": 3,
-    "errors": 11,
+    "aCorriger": 0,
+    "errors": 0,
     "warnings": 40,
     "infos": 2,
     "nodes": 3655,
     "textPairs": 1075
   },
   "perRule": {
-    "espacement": {
-      "count": 4,
-      "screens": 2
-    },
     "rayonLibre": {
       "count": 40,
       "screens": 8
-    },
-    "rayon": {
-      "count": 7,
-      "screens": 1
     },
     "chevauchement": {
       "count": 2,
@@ -77,29 +70,11 @@
           "nodes": 78,
           "instances": 13,
           "textPairs": 26,
-          "issues": [
-            {
-              "rule": "espacement",
-              "severity": "error",
-              "count": 2,
-              "samples": [
-                [
-                  "8:64",
-                  "Hero",
-                  "paddingLeft 240"
-                ],
-                [
-                  "8:64",
-                  "Hero",
-                  "paddingRight 240"
-                ]
-              ]
-            }
-          ],
-          "errors": 2,
+          "issues": [],
+          "errors": 0,
           "warnings": 0,
           "infos": 0,
-          "status": "a corriger"
+          "status": "conforme"
         },
         {
           "id": "10:118",
@@ -125,29 +100,11 @@
           "nodes": 60,
           "instances": 11,
           "textPairs": 21,
-          "issues": [
-            {
-              "rule": "espacement",
-              "severity": "error",
-              "count": 2,
-              "samples": [
-                [
-                  "12:236",
-                  "Recherche",
-                  "paddingLeft 240"
-                ],
-                [
-                  "12:236",
-                  "Recherche",
-                  "paddingRight 240"
-                ]
-              ]
-            }
-          ],
-          "errors": 2,
+          "issues": [],
+          "errors": 0,
           "warnings": 0,
           "infos": 0,
-          "status": "a corriger"
+          "status": "conforme"
         },
         {
           "id": "12:389",
@@ -340,34 +297,11 @@
           "nodes": 136,
           "instances": 13,
           "textPairs": 35,
-          "issues": [
-            {
-              "rule": "rayon",
-              "severity": "error",
-              "count": 7,
-              "samples": [
-                [
-                  "13:659",
-                  "Rectangle",
-                  "rayon 2"
-                ],
-                [
-                  "13:660",
-                  "Rectangle",
-                  "rayon 2"
-                ],
-                [
-                  "13:661",
-                  "Rectangle",
-                  "rayon 2"
-                ]
-              ]
-            }
-          ],
-          "errors": 7,
+          "issues": [],
+          "errors": 0,
           "warnings": 0,
           "infos": 0,
-          "status": "a corriger"
+          "status": "conforme"
         },
         {
           "id": "72:787",
@@ -400,7 +334,7 @@
           "status": "conforme"
         }
       ],
-      "errors": 11,
+      "errors": 0,
       "warnings": 28,
       "infos": 0
     },
